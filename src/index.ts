@@ -11,7 +11,7 @@ const port = config.get("port")
 const useSsl: boolean = config.get("useSsl")
 
 // Публикуем клиент.
-app.use(express.static(path.resolve(__dirname, "planning-client", "build")));
+app.use(express.static(path.resolve("home", "planning-client", "build")));
 
 if (useSsl === true) {
 
@@ -37,7 +37,7 @@ if (useSsl === true) {
 
 // Отдаем клиент.
 app.get("*", (req: Request, res: Response) => {
-    const rootpath = path.resolve(__dirname, "planning-client", "build")
+    const rootpath = path.resolve("home", "planning-client", "build")
     const options = { root: rootpath }
     // const clientPath: string = path.resolve(rootpath, "index.html")
     res.sendFile("index.html", options)
