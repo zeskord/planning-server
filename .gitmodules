@@ -1,3 +1,0 @@
-[submodule "build/planning-client"]
-	path = build/planning-client
-	url = https://github.com/zeskord/planning-client
