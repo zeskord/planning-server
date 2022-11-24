@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client:build": "cd build/planning-client && npm run build",
-    "client:install": "cd build/planning-client && npm install && npm run build",
     "server:build": "npx tsc",
-    "build": "npm run server:build && npm run client:build",
+    "build": "npm run server:build",
     "start": "cross-env NODE_ENV=prod node build/index.js",
     "dev": "cross-env NODE_ENV=dev node build/index.js"
   },
