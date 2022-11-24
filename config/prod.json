@@ -1,6 +1,6 @@
 {
   "useSsl": true,
-  "port": 433,
+  "port": 443,
   "sslOptions": {
     "key": "/etc/letsencrypt/live/zeskord.site/privkey.pem",
     "cert": "/etc/letsencrypt/live/zeskord.site/cert.pem",
