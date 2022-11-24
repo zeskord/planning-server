@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server:build": "npx tsc",
+    "server:build": "git pull && npx tsc",
     "build": "npm run server:build",
     "start": "cross-env NODE_ENV=prod node build/index.js",
     "dev": "cross-env NODE_ENV=dev node build/index.js"
