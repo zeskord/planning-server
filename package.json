@@ -7,7 +7,7 @@
     "server:build": "git pull && npx tsc",
     "build": "npm run server:build",
     "start": "cross-env NODE_ENV=prod node build/index.js",
-    "dev": "cross-env NODE_ENV=dev node build/index.js"
+    "dev": "npx tsc && cross-env NODE_ENV=dev node build/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,9 @@
   "homepage": "https://github.com/zeskord/planning-server#readme",
   "dependencies": {
     "config": "^3.3.8",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "sqlite3": "^5.1.2",
+    "telegram-webapps-types": "^1.0.5"
   },
   "devDependencies": {
     "@types/config": "^3.3.0",

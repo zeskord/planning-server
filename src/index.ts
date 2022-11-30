@@ -4,6 +4,8 @@ import path from "path"
 import http from "http"
 import https from "https"
 import config from "config"
+import * as api from "./api"
+import { mainApp } from "./logic"
 
 const app: Express = express()
 const port = config.get("port")
@@ -12,6 +14,9 @@ const useSsl: boolean = config.get("useSsl")
 
 // Публикуем клиент.
 app.use(express.static(path.resolve("/home", "planning-client", "build")));
+
+// Добавляем маршруты api
+api.addApiRoutes(app)
 
 if (useSsl === true) {
 
@@ -27,6 +32,14 @@ if (useSsl === true) {
         req.secure ? next() : res.redirect("https://" + req.headers.host + req.url)
     })
 
+    // Отдаем клиент.
+    app.get("*", (req: Request, res: Response) => {
+        const rootpath = path.resolve("/home", "planning-client", "build")
+        const options = { root: rootpath }
+        // const clientPath: string = path.resolve(rootpath, "index.html")
+        res.sendFile("index.html", options)
+    })
+
     https.createServer(sslOptions, app).listen(port)
 
 } else {
@@ -35,13 +48,9 @@ if (useSsl === true) {
 
 }
 
-// Отдаем клиент.
-app.get("*", (req: Request, res: Response) => {
-    const rootpath = path.resolve("/home", "planning-client", "build")
-    const options = { root: rootpath }
-    // const clientPath: string = path.resolve(rootpath, "index.html")
-    res.sendFile("index.html", options)
-})
+
+
+
 
 app.get("/", (req: Request, res: Response) => {
     res.send("OK")
