@@ -1,11 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DatabaseClass = void 0;
-class DatabaseClass {
+exports.DatabaseManager = void 0;
+class DatabaseManager {
     constructor() {
         const sqlite3 = require('sqlite3').verbose();
         this.db = new sqlite3.Database(':memory:');
         this.dbInit();
+    }
+    static get Instance() {
+        return this._instance || (this._instance = new this());
     }
     dbInit() {
         const db = this.db;
@@ -21,7 +24,19 @@ class DatabaseClass {
     }
     getRoomList(callback) {
         const db = this.db;
-        db.all("SELECT * from rooms", {}, callback);
+        db.all("SELECT * FROM rooms", {}, callback);
+    }
+    getUsers(callback, roomId) {
+        const db = this.db;
+        db.all("SELECT * FROM users WHERE id = $id", { $id: roomId }, callback);
+    }
+    updateUser(callback, userId, data) {
+        const db = this.db;
+        db.run("UPDATE users SET id = $userId", { $id: userId }, callback);
+    }
+    deleteUsers(callback, userId) {
+        const db = this.db;
+        db.run("DELETE FROM users WHERE id = $id", { $id: userId }, callback);
     }
 }
-exports.DatabaseClass = DatabaseClass;
+exports.DatabaseManager = DatabaseManager;
