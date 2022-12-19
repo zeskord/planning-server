@@ -36,6 +36,8 @@ const api = __importStar(require("./api"));
 const app = (0, express_1.default)();
 const port = config_1.default.get("port");
 const useSsl = config_1.default.get("useSsl");
+app.set('json spaces', 2);
+app.use(express_1.default.json());
 // Публикуем клиент.
 app.use(express_1.default.static(path_1.default.resolve("/home", "planning-client", "build")));
 // Добавляем маршруты api

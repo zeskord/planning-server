@@ -1,39 +1,51 @@
 import { TelegramWebApps } from "telegram-webapps-types"
 
-export interface IClientTickRequestData {
-    // user: WebAppUser
-    userId: number,
-    roomId: number
+export enum Room {
+    Light = 0,
+    Dark = 1
 }
 
-export interface IClientTickResponseData {
-    // user: WebAppUser
-    userId: number,
-    roomId: number,
-    roomState : RoomState
-    users: TelegramWebApps.WebAppUser[]
+export enum UserRole {
+    Estimator = 0,
+    Spectator = 1,
+    Admin = 2
 }
 
-// Состояние комнаты.
-export type RoomState = {
-    resultCode: number,
-    room: Room,
-    users: RoomStateUserEntry[],
-    spectators: RoomStateUserEntry[],
-    marksVisible: boolean,
-    userIds: number[],
-    spectatorIds: number[]
+export type UserId = number
+
+export type Mark = number | undefined
+
+// Данные, которые будут взяты из local storage (или из моей базы на сервере).
+export type UserStateUpdateData = {
+    id: UserId,
+    name: string,
+    role: UserRole | undefined,
+    room: Room | undefined
+}
+
+export type UserTickRequest = {
+    time: Date,
+    room : Room,
+    userId : UserId
 }
 
 // Элемент состояния комнаты, связанный с пользователями и зрителями.
 export type RoomStateUserEntry = {
-    user: TelegramWebApps.WebAppUser,
-    currentMark: number
-    isSpectator: boolean
+    user: UserId,
+    currentMark: Mark,
+    role: UserRole | undefined
 }
 
-// Описание комнаты.
-export type Room = {
-    id: number,
-    name: string
+// Состояние комнаты.
+export type RoomStateResponseData = {
+    room: Room,
+    users: RoomStateUserEntry[],
+    userIds: UserId[],
+    marksVisible: boolean
 }
+
+export type UserTickResponse = {
+    time: Date,
+    roomState: RoomStateResponseData
+}
+

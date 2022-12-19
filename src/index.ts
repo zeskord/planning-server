@@ -5,12 +5,14 @@ import http from "http"
 import https from "https"
 import config from "config"
 import * as api from "./api"
-import { mainApp } from "./logic"
 
 const app: Express = express()
 const port = config.get("port")
 
 const useSsl: boolean = config.get("useSsl")
+
+app.set('json spaces', 2)
+app.use(express.json())
 
 // Публикуем клиент.
 app.use(express.static(path.resolve("/home", "planning-client", "build")));

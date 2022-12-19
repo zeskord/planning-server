@@ -2,5 +2,39 @@ POST http://localhost:3000/api/tick HTTP/1.1
 content-type: application/json
 
 {
-    "key": "value"
+    "userId": 0,
+    "userName": "Пользователь 1",
+    "role": 0,
+    "room": 0 
+}
+
+###
+
+POST http://localhost:3000/api/tick HTTP/1.1
+content-type: application/json
+
+{
+    "userId": 1,
+    "userName": "Пользователь 2",
+    "role": 0,
+    "room": 0
+}
+
+###
+
+POST http://localhost:3000/api/sendMark HTTP/1.1
+content-type: application/json
+
+{
+    "userId": 1,
+    "mark": 0.5
+}
+
+###
+
+POST http://localhost:3000/api/clearMarks HTTP/1.1
+content-type: application/json
+
+{
+    "room": 0
 }
