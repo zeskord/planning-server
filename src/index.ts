@@ -15,7 +15,8 @@ app.set('json spaces', 2)
 app.use(express.json())
 
 // Публикуем клиент.
-app.use(express.static(path.resolve("/home", "planning-client", "build")));
+const clientPath: string = config.get("clientPath")
+app.use(express.static(path.resolve(clientPath)));
 
 // Добавляем маршруты api
 api.addApiRoutes(app)

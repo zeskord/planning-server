@@ -39,7 +39,8 @@ const useSsl = config_1.default.get("useSsl");
 app.set('json spaces', 2);
 app.use(express_1.default.json());
 // Публикуем клиент.
-app.use(express_1.default.static(path_1.default.resolve("/home", "planning-client", "build")));
+const clientPath = config_1.default.get("clientPath");
+app.use(express_1.default.static(path_1.default.resolve(clientPath)));
 // Добавляем маршруты api
 api.addApiRoutes(app);
 if (useSsl === true) {

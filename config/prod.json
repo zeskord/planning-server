@@ -5,5 +5,6 @@
     "key": "/etc/letsencrypt/live/zeskord.ru/privkey.pem",
     "cert": "/etc/letsencrypt/live/zeskord.ru/cert.pem",
     "ca": "/etc/letsencrypt/live/zeskord.ru/chain.pem"
-  }
+  },
+  "clientPath": "/home/planning-client/build"
 }

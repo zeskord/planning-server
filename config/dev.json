@@ -1,4 +1,5 @@
 {
   "useSsl": false,
-  "port": 3000
+  "port": 3000,
+  "clientPath": "E:/MyProjects/planning-client/build"
 }
